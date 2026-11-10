@@ -1,0 +1,16 @@
+# Dependencies — never commit these
+node_modules/
+
+# iOS build outputs
+ios/App/Pods/
+ios/App/output/
+DerivedData/
+*.xcarchive
+build/
+
+# Capacitor re-copies the web assets here on every sync — the source
+# of truth is www/, so the copy is not committed
+ios/App/App/public/
+
+# OS noise
+.DS_Store
