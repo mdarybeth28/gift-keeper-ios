@@ -1,0 +1,18 @@
+{
+  "dependencies": {
+    "@capacitor/core": "^7.4.0",
+    "@capacitor/ios": "^7.4.0"
+  },
+  "description": "Gift Keeper iOS \u2014 native SwiftUI layer + Capacitor shell, cloned from the proven Pet Keeper recipe. Not submitted yet.",
+  "devDependencies": {
+    "@capacitor/cli": "^7.4.0",
+    "typescript": "^7.0.2"
+  },
+  "name": "gift-keeper-ios",
+  "private": true,
+  "scripts": {
+    "open": "cap open ios",
+    "sync": "cap sync ios"
+  },
+  "version": "0.1.0"
+}
