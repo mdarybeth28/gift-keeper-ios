@@ -39,7 +39,7 @@ struct SignInView: View {
                     isWorking = true
                     Task {
                         await session.signIn(email: email.trimmingCharacters(in: .whitespaces),
-                                             password: <redacted>
+                                             password: password)
                         isWorking = false
                     }
                 } label: {
