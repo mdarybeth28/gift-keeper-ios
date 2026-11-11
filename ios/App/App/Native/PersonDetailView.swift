@@ -23,9 +23,9 @@ struct PersonDetailView: View {
                     }
                 }
             }
-            if !person.occasions.isEmpty {
+            if let occasions = person.occasions, !occasions.isEmpty {
                 Section(header: Text("Their days")) {
-                    ForEach(person.occasions) { occasion in
+                    ForEach(occasions) { occasion in
                         HStack {
                             Text(occasion.label ?? "")
                             Spacer()
