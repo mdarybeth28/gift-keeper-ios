@@ -18,6 +18,26 @@ enum SupabaseConfig {
         projectURL.appendingPathComponent("auth/v1/logout")
     }
 
+    static var signupURL: URL {
+        projectURL.appendingPathComponent("auth/v1/signup")
+    }
+
+    static var recoverURL: URL {
+        projectURL.appendingPathComponent("auth/v1/recover")
+    }
+
+    /// An Edge Function's invoke door (functions/v1/<name>) — the
+    /// same doors the web app knocks on (read-gift, send-feedback,
+    /// send-help-photo, delete-account).
+    static func functionURL(_ name: String) -> URL {
+        projectURL.appendingPathComponent("functions/v1/\(name)")
+    }
+
+    /// The Storage upload door for one object in one bucket.
+    static func storageObjectURL(bucket: String, path: String) -> URL {
+        projectURL.appendingPathComponent("storage/v1/object/\(bucket)/\(path)")
+    }
+
     static func restURL(_ path: String) -> URL {
         projectURL.appendingPathComponent("rest/v1/\(path)")
     }

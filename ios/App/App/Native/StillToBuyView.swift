@@ -73,6 +73,8 @@ struct StillToBuyView: View {
                         }
                     }
                 }
+                .scrollContentBackground(.hidden)
+                .background(Theme.page)
                 .refreshable { await giftStore.load(session: session) }
             }
         }
@@ -80,29 +82,60 @@ struct StillToBuyView: View {
 
     private func row(_ item: GiftWithPerson, showHidingPlace: Bool) -> some View {
         VStack(alignment: .leading, spacing: 3) {
-            HStack(alignment: .firstTextBaseline) {
-                Text(item.gift.name ?? "")
-                    .font(.headline)
-                Spacer()
-                if item.gift.displayPrice > 0 {
-                    Text(GiftListConstants.money(item.gift.displayPrice))
-                        .fontWeight(.semibold)
+            HStack(alignment: .top, spacing: 10) {
+                GiftPhotoView(dataURL: item.gift.photo, size: 44)
+                VStack(alignment: .leading, spacing: 3) {
+                    HStack(alignment: .firstTextBaseline) {
+                        Text(item.gift.name ?? "")
+                            .font(.headline)
+                        Spacer()
+                        if item.gift.displayPrice > 0 {
+                            Text(GiftListConstants.money(item.gift.displayPrice))
+                                .fontWeight(.semibold)
+                        }
+                    }
+                    if !item.personName.isEmpty {
+                        Text("For \(item.personName)")
+                            .font(.subheadline)
+                            .foregroundStyle(.secondary)
+                    }
+                    if let occasion = item.gift.occasionLabel, !occasion.isEmpty {
+                        Text(occasion).font(.caption).foregroundStyle(.secondary)
+                    }
+                    if showHidingPlace, let hiding = item.gift.hidingPlace, !hiding.isEmpty {
+                        Label("Hidden in: \(hiding)", systemImage: "eye.slash")
+                            .font(.subheadline)
+                            .foregroundStyle(Theme.orange)
+                    }
                 }
             }
-            if !item.personName.isEmpty {
-                Text("For \(item.personName)")
+            // One-tap status changes, like the web's Mark buttons.
+            HStack(spacing: 14) {
+                if item.gift.normalizedStatus == "thinking" {
+                    Button("Mark purchased") {
+                        Task { await setStatus(item.gift, status: "purchased") }
+                    }
                     .font(.subheadline)
-                    .foregroundStyle(.secondary)
-            }
-            if let occasion = item.gift.occasionLabel, !occasion.isEmpty {
-                Text(occasion).font(.caption).foregroundStyle(.secondary)
-            }
-            if showHidingPlace, let hiding = item.gift.hidingPlace, !hiding.isEmpty {
-                Label("Hidden in: \(hiding)", systemImage: "eye.slash")
+                }
+                if item.gift.normalizedStatus == "purchased" {
+                    Button("Mark wrapped") {
+                        Task { await setStatus(item.gift, status: "wrapped") }
+                    }
                     .font(.subheadline)
-                    .foregroundStyle(Color(red: 0.12, green: 0.44, blue: 0.36))
+                }
             }
         }
         .padding(.vertical, 2)
+    }
+
+    private func setStatus(_ gift: GiftEntry, status: String) async {
+        let gid = gift.id
+        await giftStore.mutate(session: session) { state in
+            var gifts = GiftStateKit.dicts(state["gifts"])
+            for index in gifts.indices where GiftStateKit.str(gifts[index]["id"]) == gid {
+                gifts[index]["status"] = status
+            }
+            state["gifts"] = gifts
+        }
     }
 }

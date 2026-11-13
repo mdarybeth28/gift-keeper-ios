@@ -10,15 +10,15 @@ import Foundation
 /// The field names and shapes below are copied from the LIVE web
 /// app's own normalizers (normState / normPerson / normGift /
 /// defaultState in the multi-person build), field for field.
-/// Nothing is invented. Fields the native layer never shows
-/// (photos as data URLs, reminder/notification internals, the PIN —
-/// which is device-local on the web and stripped before upload:
-/// stripPin) are deliberately NOT decoded here; decoding ignores
-/// unknown keys, so the full blob parses safely without dragging
-/// photo data into memory. The model is read-only: the web app's
-/// save path (merge-by-ID, cloud-is-the-list, visible save state)
-/// is account-safety machinery that a later native editing phase
-/// must port whole, not piecemeal.
+/// Nothing is invented. Reminder/notification internals and the
+/// PIN (device-local on the web, stripped before upload) are not
+/// decoded into this typed mirror; decoding ignores unknown keys.
+/// Gift photos ARE decoded (they are part of the gift, and the
+/// parity round shows them). The full blob itself lives in
+/// GiftListStore as a JSON dictionary — GiftStateKit carries the
+/// web's normalizers, its merge-by-ID fold, and its save path,
+/// ported whole; this typed shape is the read mirror the views
+/// render from.
 ///
 /// NORMALIZATION parity with the web (applied in GiftListService
 /// after decode, mirroring normGift/normPerson):
@@ -30,6 +30,9 @@ import Foundation
 
 struct GiftListData: Decodable {
     let budget: Double?
+    /// How many days ahead occasion reminders start (the web's
+    /// state.reminderDays; the Upcoming view's window).
+    let reminderDays: Double?
     let people: [GiftPerson]?
     let gifts: [GiftEntry]?
     /// Per-occasion spending limits, label -> dollars
@@ -80,8 +83,14 @@ struct GiftEntry: Decodable, Identifiable {
     let occasionLabel: String?
     let hidingPlace: String?
     let status: String?
+    /// The gift's photo, stored in the blob as a data URL (the
+    /// web's normGift `photo`). Null when there is none.
+    let photo: String?
     let carrier: String?
     let trackingNumber: String?
+    /// The shipping-label photo, also a data URL in the blob
+    /// (the web's normGift `shippingPhoto`).
+    let shippingPhoto: String?
     let trackingStatus: String?
     let archived: Bool?
 
@@ -112,6 +121,19 @@ enum GiftListConstants {
         "wrapped": "Wrapped",
         "given": "Given",
     ]
+
+    /// The web app's STATUS_ALIAS (normGift's alias table).
+    static let statusAliases = [
+        "idea": "thinking",
+        "bought": "purchased",
+    ]
+
+    /// Every status, in the web's own order (the gift form's
+    /// segment and the person page's Mark buttons).
+    static let statuses = ["thinking", "purchased", "wrapped", "given"]
+
+    /// The web app's CARRIERS.
+    static let carriers = ["", "USPS", "UPS", "FedEx", "Other", "Yun Express"]
 
     /// USD formatting exactly as the web app's money(): no cents
     /// for whole dollars, two decimals otherwise.

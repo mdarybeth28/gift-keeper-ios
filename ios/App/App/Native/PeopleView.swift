@@ -10,6 +10,8 @@ import SwiftUI
 struct PeopleView: View {
     @EnvironmentObject private var session: SessionStore
     @EnvironmentObject private var giftStore: GiftListStore
+    @State private var showAddPerson = false
+    @State private var showAddGift = false
 
     var body: some View {
         NavigationStack {
@@ -17,12 +19,31 @@ struct PeopleView: View {
                 .navigationTitle("Your people")
                 .toolbar {
                     if session.isSignedIn {
+                        ToolbarItem(placement: .navigationBarLeading) {
+                            if let text = giftStore.saveStatusText {
+                                Text(text)
+                                    .font(.caption)
+                                    .foregroundStyle(giftStore.saveState == .failed ? Theme.warn : Theme.muted)
+                            }
+                        }
                         ToolbarItem(placement: .navigationBarTrailing) {
-                            Button("Sign out") {
-                                Task { await session.signOut() }
+                            Menu {
+                                Button("Add a person") { showAddPerson = true }
+                                Button("Add a gift") { showAddGift = true }
+                                Button("Sign out") {
+                                    Task { await session.signOut() }
+                                }
+                            } label: {
+                                Image(systemName: "plus.circle.fill")
                             }
                         }
                     }
+                }
+                .sheet(isPresented: $showAddPerson) {
+                    PersonFormView(editing: nil)
+                }
+                .sheet(isPresented: $showAddGift) {
+                    GiftFormView(editing: nil, defaultPersonID: nil)
                 }
         }
         .task(id: session.state) {
@@ -52,14 +73,16 @@ struct PeopleView: View {
                 }
                 .padding()
             } else if giftStore.visiblePeople.isEmpty {
-                VStack(spacing: 10) {
+                VStack(spacing: 12) {
                     Text("🎁").font(.largeTitle)
                     Text("No people yet")
                         .font(.headline)
-                    Text("The people on your Gift Keeper list will show up here. You can add people in the web app today; adding them here arrives in a later phase.")
+                    Text("Add your first person and Gift Keeper starts keeping track — what you bought, who it's for, and where you hid it.")
                         .font(.subheadline)
                         .foregroundStyle(.secondary)
                         .multilineTextAlignment(.center)
+                    Button("Add a person") { showAddPerson = true }
+                        .buttonStyle(PrimaryButtonStyle())
                 }
                 .padding()
             } else {
@@ -68,7 +91,7 @@ struct PeopleView: View {
                         Section(header: Text(group.category)) {
                             ForEach(group.people) { person in
                                 NavigationLink {
-                                    PersonDetailView(person: person)
+                                    PersonDetailView(personID: person.id)
                                 } label: {
                                     personRow(person)
                                 }
@@ -76,6 +99,8 @@ struct PeopleView: View {
                         }
                     }
                 }
+                .scrollContentBackground(.hidden)
+                .background(Theme.page)
                 .refreshable { await giftStore.load(session: session) }
             }
         }
@@ -86,7 +111,7 @@ struct PeopleView: View {
         let spent = giftStore.spent(for: person)
         return HStack(spacing: 12) {
             Circle()
-                .fill(Color(hexString: person.color) ?? Color(red: 0.12, green: 0.44, blue: 0.36))
+                .fill(Color(hexString: person.color) ?? Theme.orange)
                 .frame(width: 38, height: 38)
                 .overlay(
                     Text(initials(of: person.displayName))
