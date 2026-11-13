@@ -35,11 +35,7 @@ struct GiftRead: Decodable {
         if let text = try? box.decodeIfPresent(String.self, forKey: .price) {
             price = text
         } else if let number = try? box.decodeIfPresent(Double.self, forKey: .price) {
-            if let value = number {
-                price = value == value.rounded() ? String(Int(value)) : String(value)
-            } else {
-                price = nil
-            }
+            price = number == number.rounded() ? String(Int(number)) : String(number)
         } else {
             price = nil
         }
