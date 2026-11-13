@@ -67,10 +67,9 @@ struct ArchivedView: View {
         .navigationBarTitleDisplayMode(.inline)
     }
 
-    private func giftCount(_ person: GiftPerson) -> Int {
-        (giftStore.list?.gifts ?? []).filter { $0.personId == person.id }.count == 1
-            ? "1 gift"
-            : "\((giftStore.list?.gifts ?? []).filter { $0.personId == person.id }.count) gifts"
+    private func giftCount(_ person: GiftPerson) -> String {
+        let n = (giftStore.list?.gifts ?? []).filter { $0.personId == person.id }.count
+        return n == 1 ? "1 gift" : "\(n) gifts"
     }
 
     private func firstName(_ person: GiftPerson) -> String {
