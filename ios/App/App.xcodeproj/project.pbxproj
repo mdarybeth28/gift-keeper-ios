@@ -28,6 +28,17 @@
 		B11D0000000000000000000F /* SubscriptionStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = F11E0000000000000000000F /* SubscriptionStore.swift */; };
 		B11D00000000000000000010 /* SupabaseConfig.swift in Sources */ = {isa = PBXBuildFile; fileRef = F11E00000000000000000010 /* SupabaseConfig.swift */; };
 		B11D00000000000000000011 /* WebTabView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F11E00000000000000000011 /* WebTabView.swift */; };
+		B11D00000000000000000012 /* Theme.swift in Sources */ = {isa = PBXBuildFile; fileRef = F11E00000000000000000012 /* Theme.swift */; };
+		B11D00000000000000000013 /* GiftStateKit.swift in Sources */ = {isa = PBXBuildFile; fileRef = F11E00000000000000000013 /* GiftStateKit.swift */; };
+		B11D00000000000000000014 /* GiftWriteService.swift in Sources */ = {isa = PBXBuildFile; fileRef = F11E00000000000000000014 /* GiftWriteService.swift */; };
+		B11D00000000000000000015 /* GiftPhoto.swift in Sources */ = {isa = PBXBuildFile; fileRef = F11E00000000000000000015 /* GiftPhoto.swift */; };
+		B11D00000000000000000016 /* PersonFormView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F11E00000000000000000016 /* PersonFormView.swift */; };
+		B11D00000000000000000017 /* GiftFormView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F11E00000000000000000017 /* GiftFormView.swift */; };
+		B11D00000000000000000018 /* WishListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F11E00000000000000000018 /* WishListView.swift */; };
+		B11D00000000000000000019 /* BudgetView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F11E00000000000000000019 /* BudgetView.swift */; };
+		B11D0000000000000000001A /* UpcomingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F11E0000000000000000001A /* UpcomingView.swift */; };
+		B11D0000000000000000001B /* ArchivedView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F11E0000000000000000001B /* ArchivedView.swift */; };
+		B11D0000000000000000001C /* FeedbackView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F11E0000000000000000001C /* FeedbackView.swift */; };
 		504EC30F1FED79650016851F /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 504EC30E1FED79650016851F /* Assets.xcassets */; };
 		504EC3121FED79650016851F /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 504EC3101FED79650016851F /* LaunchScreen.storyboard */; };
 		50B271D11FEDC1A000F3C39B /* public in Resources */ = {isa = PBXBuildFile; fileRef = 50B271D01FEDC1A000F3C39B /* public */; };
@@ -57,6 +68,17 @@
 		F11E0000000000000000000F /* SubscriptionStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SubscriptionStore.swift; sourceTree = "<group>"; };
 		F11E00000000000000000010 /* SupabaseConfig.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SupabaseConfig.swift; sourceTree = "<group>"; };
 		F11E00000000000000000011 /* WebTabView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WebTabView.swift; sourceTree = "<group>"; };
+		F11E00000000000000000012 /* Theme.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Theme.swift; sourceTree = "<group>"; };
+		F11E00000000000000000013 /* GiftStateKit.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GiftStateKit.swift; sourceTree = "<group>"; };
+		F11E00000000000000000014 /* GiftWriteService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GiftWriteService.swift; sourceTree = "<group>"; };
+		F11E00000000000000000015 /* GiftPhoto.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GiftPhoto.swift; sourceTree = "<group>"; };
+		F11E00000000000000000016 /* PersonFormView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PersonFormView.swift; sourceTree = "<group>"; };
+		F11E00000000000000000017 /* GiftFormView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GiftFormView.swift; sourceTree = "<group>"; };
+		F11E00000000000000000018 /* WishListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WishListView.swift; sourceTree = "<group>"; };
+		F11E00000000000000000019 /* BudgetView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BudgetView.swift; sourceTree = "<group>"; };
+		F11E0000000000000000001A /* UpcomingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UpcomingView.swift; sourceTree = "<group>"; };
+		F11E0000000000000000001B /* ArchivedView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ArchivedView.swift; sourceTree = "<group>"; };
+		F11E0000000000000000001C /* FeedbackView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeedbackView.swift; sourceTree = "<group>"; };
 		504EC30E1FED79650016851F /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		504EC3111FED79650016851F /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		504EC3131FED79650016851F /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -149,6 +171,17 @@
 				F11E0000000000000000000F /* SubscriptionStore.swift */,
 				F11E00000000000000000010 /* SupabaseConfig.swift */,
 				F11E00000000000000000011 /* WebTabView.swift */,
+				F11E00000000000000000012 /* Theme.swift */,
+				F11E00000000000000000013 /* GiftStateKit.swift */,
+				F11E00000000000000000014 /* GiftWriteService.swift */,
+				F11E00000000000000000015 /* GiftPhoto.swift */,
+				F11E00000000000000000016 /* PersonFormView.swift */,
+				F11E00000000000000000017 /* GiftFormView.swift */,
+				F11E00000000000000000018 /* WishListView.swift */,
+				F11E00000000000000000019 /* BudgetView.swift */,
+				F11E0000000000000000001A /* UpcomingView.swift */,
+				F11E0000000000000000001B /* ArchivedView.swift */,
+				F11E0000000000000000001C /* FeedbackView.swift */,
 			);
 			path = Native;
 			sourceTree = "<group>";
@@ -286,6 +319,17 @@
 				B11D0000000000000000000F /* SubscriptionStore.swift in Sources */,
 				B11D00000000000000000010 /* SupabaseConfig.swift in Sources */,
 				B11D00000000000000000011 /* WebTabView.swift in Sources */,
+				B11D00000000000000000012 /* Theme.swift in Sources */,
+				B11D00000000000000000013 /* GiftStateKit.swift in Sources */,
+				B11D00000000000000000014 /* GiftWriteService.swift in Sources */,
+				B11D00000000000000000015 /* GiftPhoto.swift in Sources */,
+				B11D00000000000000000016 /* PersonFormView.swift in Sources */,
+				B11D00000000000000000017 /* GiftFormView.swift in Sources */,
+				B11D00000000000000000018 /* WishListView.swift in Sources */,
+				B11D00000000000000000019 /* BudgetView.swift in Sources */,
+				B11D0000000000000000001A /* UpcomingView.swift in Sources */,
+				B11D0000000000000000001B /* ArchivedView.swift in Sources */,
+				B11D0000000000000000001C /* FeedbackView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
