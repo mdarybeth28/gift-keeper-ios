@@ -46,6 +46,7 @@ struct RootTabView: View {
         .environmentObject(approval)
         .environmentObject(subscriptions)
         .environmentObject(giftStore)
+        .preferredColorScheme(.light)
         .task {
             await session.restore()
         }
